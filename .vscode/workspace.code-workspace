@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "..",
+			"name": "Project: Test 01 (SDL2)"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			".clang-format": "yaml",
+			"iostream": "cpp",
+			"utility": "cpp",
+			"ostream": "cpp",
+			"xstring": "cpp",
+			"memory": "cpp"
+		},
+		"files.exclude": {
+			".vscode/ipch": true,
+			"project/include/SDL2": true,
+		},
+		// Extension settings
+		// "bracket-pair-colorizer-2.colors": [
+		// 	"Orchid",
+		// 	"Tomato",
+		// 	"LimeGreen"
+		// ],
+		"C_Cpp.updateChannel": "Insiders",
+	}
+}
