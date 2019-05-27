@@ -75,5 +75,5 @@ echo ~~~~~~~~~~~~~~~~~~~
 
 rem // Pause the script if it was launched via double-click
 rem // Alternatively: if %0 equ "%~dpnx0" pause
-echo %cmdcmdline% | find /i """%~f0""">nul && pause
+echo %cmdcmdline% | find /i """%~f0""">nul && pause || "cmd /c exit /b 0"
 exit /b %errorlevel%
