@@ -32,7 +32,7 @@ public:
 	SDL_PixelFormat * get_format();
 
 	void reset(SDL_Surface * surface);
-	bool empty();
+	bool is_empty();
 
 protected:
 	std::unique_ptr<SDL_Surface, MSDL_SurfaceDeleter> _surface;

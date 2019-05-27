@@ -76,7 +76,7 @@ void MSDL_Surface::reset(SDL_Surface * surface)
 	_surface.reset(surface);
 }
 
-bool MSDL_Surface::empty()
+bool MSDL_Surface::is_empty()
 {
 	return (_surface == nullptr);
 }

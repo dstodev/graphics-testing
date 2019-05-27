@@ -8,12 +8,22 @@ set DIR=%~dp0
 cd /D %DIR%
 
 rem // Command line parameters for CL build tool
-set OUTPUT=debug
+set OUTPUT=release
 set TARGET=main
 set PLATFORM=x64
 
 rem // Build, compilation, and link variables
-set FLAGS=/Od /W4 /Gm /EHsc /ZI /MTd
+if %OUTPUT% == debug (
+	set FLAGS=/Od /W4 /EHsc /ZI /MTd
+	set SUBSYS=CONSOLE
+) else if %OUTPUT% == release (
+	set FLAGS=/O2 /MT /GA
+	set SUBSYS=WINDOWS
+) else (
+	echo Invalid build mode!
+	"cmd /c exit /b 1" & rem // Set %errorlevel% to 1
+	goto end_banner
+)
 set INCLUDES=/I include /I include/SDL2
 set SOURCES=source/**
 set EXTLIBPATH=libraries
@@ -44,10 +54,17 @@ call cl %FLAGS% %INCLUDES% ^
 	/Fo:%OUTPUT%\ /Fd:%OUTPUT%\ %SOURCES% ^
 	/link /LIBPATH:%EXTLIBPATH% ^
 	/OUT:%OUTPUT%\%TARGET%.exe /PDB:%OUTPUT%\%TARGET%.pdb ^
-	/INCREMENTAL /SUBSYSTEM:CONSOLE ^
+	/INCREMENTAL /SUBSYSTEM:%SUBSYS% ^
 	%LIBRARIES% ^
 	2>&1
 
+rem // Clean project
+if %OUTPUT% == release (
+	echo Cleaning project...
+	del /q %output%\*.ilk %output%\*.obj
+)
+
+:end_banner
 echo ~~~~~~~~~~~~~~~~~~~
 if %errorlevel% == 0 (
 	echo   Build complete!
@@ -55,3 +72,4 @@ if %errorlevel% == 0 (
 	echo    Build failed!
 )
 echo ~~~~~~~~~~~~~~~~~~~
+exit /b %errorlevel%

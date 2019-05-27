@@ -21,7 +21,7 @@ MSDL_Surface MSDL_Window::get_surface() const
 	SDL_Surface * surface = nullptr;
 	if (_window) {
 		surface = SDL_GetWindowSurface(_window);
-		return MSDL_Surface(surface, true);
+		return MSDL_Surface(surface, true);  // Returned as rval; real pointer passed by move constructor.
 	} else {
 		return MSDL_Surface(nullptr);
 	}
