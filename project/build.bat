@@ -8,7 +8,7 @@ set DIR=%~dp0
 cd /D %DIR%
 
 rem // Command line parameters for CL build tool
-set OUTPUT=release
+set OUTPUT=debug
 set TARGET=main
 set PLATFORM=x64
 
@@ -72,4 +72,8 @@ if %errorlevel% == 0 (
 	echo    Build failed!
 )
 echo ~~~~~~~~~~~~~~~~~~~
+
+rem // Pause the script if it was launched via double-click
+rem // Alternatively: if %0 equ "%~dpnx0" pause
+echo %cmdcmdline% | find /i """%~f0""">nul && pause
 exit /b %errorlevel%

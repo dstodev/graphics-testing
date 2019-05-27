@@ -48,7 +48,6 @@ bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint32 color)
 bool MSDL_Surface::load_bmp(const string & file)
 {
 	reset(SDL_LoadBMP(file.c_str()));
-
 	return (this->_surface != nullptr);
 }
 
