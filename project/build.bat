@@ -13,10 +13,12 @@ set TARGET=main
 set PLATFORM=x64
 
 rem // Build, compilation, and link variables
-if %OUTPUT% == debug (
+if /i %OUTPUT% equ debug (
+	set OUTPUT=debug
 	set FLAGS=/Od /W4 /EHsc /ZI /MTd
 	set SUBSYS=CONSOLE
-) else if %OUTPUT% == release (
+) else if /i %OUTPUT% equ release (
+	set OUTPUT=release
 	set FLAGS=/O2 /MT /GA
 	set SUBSYS=WINDOWS
 ) else (
@@ -61,7 +63,7 @@ call cl %FLAGS% %INCLUDES% ^
 rem // Clean project
 if %OUTPUT% == release (
 	echo Cleaning project...
-	del /q %output%\*.ilk %output%\*.obj
+	del /q %OUTPUT%\*.ilk %OUTPUT%\*.obj
 )
 
 :end_banner
@@ -73,7 +75,7 @@ if %errorlevel% == 0 (
 )
 echo ~~~~~~~~~~~~~~~~~~~
 
-rem // Pause the script if it was launched via double-click
-rem // Alternatively: if %0 equ "%~dpnx0" pause
-echo %cmdcmdline% | find /i """%~f0""">nul && pause || "cmd /c exit /b 0"
+rem // Pause the script if it was launched via double-click, then exit
+set TEMP_ERRORLEVEL=%errorlevel%
+echo %cmdcmdline% | find /i """%~f0""">nul && pause || "cmd /c exit /b %TEMP_ERRORLEVEL%"
 exit /b %errorlevel%
