@@ -13,7 +13,7 @@ set TARGET=main
 set PLATFORM=x64
 
 rem // Build, compilation, and link variables
-set FLAGS=/Od /W4 /Gm /EHsc /ZI /MDd
+set FLAGS=/Od /W4 /Gm /EHsc /ZI /MTd
 set INCLUDES=/I include /I include/SDL2
 set SOURCES=source/**
 set EXTLIBPATH=libraries

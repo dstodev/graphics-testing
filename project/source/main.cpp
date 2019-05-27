@@ -29,17 +29,16 @@ int main(int argc, char * argv[])
 		return 1;
 	}
 
-	unique_ptr<MSDL_Surface> screen_surface;
-	unique_ptr<MSDL_Surface> image_surface;
+	MSDL_Surface screen_surface;
+	MSDL_Surface image_surface;
 	MSDL_Window window("First Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
 	                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-	if (window) {
-		screen_surface = window.get_surface();
-		screen_surface->fill_rect(0, SDL_MapRGB(screen_surface->get_format(), 0xFF, 0xFF, 0xFF));
+	if (!(screen_surface = window.get_surface()).empty()) {
+		screen_surface.fill_rect(0, SDL_MapRGB(screen_surface.get_format(), 0x00, 0xFF, 0xFF));
 
-		// cout << image_surface.load_bmp("images/test.bmp") << endl;
-		// cout << screen_surface.blit_from(image_surface, 0, 0) << endl;
+		cout << image_surface.load_bmp("images/test.bmp") << endl;
+		cout << screen_surface.blit_from(image_surface, 0, 0) << endl;
 
 		window.update();
 		SDL_Delay(5000);

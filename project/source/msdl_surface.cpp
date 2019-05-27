@@ -1,61 +1,60 @@
 #include "msdl_surface.h"
 
+#include <memory>
+using std::make_unique;
+using std::unique_ptr;
+
 MSDL_Surface::MSDL_Surface() : _surface(nullptr)
 {}
 
-MSDL_Surface::MSDL_Surface(SDL_Surface * surface) : _surface(surface)
+MSDL_Surface::MSDL_Surface(SDL_Surface * surface, bool dedicated) : _surface(surface), _dedicated(dedicated)
 {}
 
 MSDL_Surface::~MSDL_Surface()
+{}
+
+MSDL_Surface::MSDL_Surface(const MSDL_Surface & copy) : _surface(nullptr)
 {
-	clear_surface();
+	*this = copy;
 }
 
-MSDL_Surface::MSDL_Surface(const MSDL_Surface & copy)
+MSDL_Surface::MSDL_Surface(MSDL_Surface && move)
 {
-	copy_surface(copy._surface);
+	*this = move;
 }
 
 MSDL_Surface & MSDL_Surface::operator=(const MSDL_Surface & copy)
 {
-	copy_surface(copy._surface);
+	if (this != &copy) {
+		SDL_Surface * surface = copy._surface.get();
+		reset(SDL_ConvertSurface(surface, surface->format, 0));
+		_dedicated = copy._dedicated;
+	}
 	return *this;
 }
 
-MSDL_Surface::operator bool() const
+MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface && move)
 {
-	return _surface != nullptr;
-}
-
-void MSDL_Surface::clear_surface()
-{
-	SDL_FreeSurface(_surface);  // It is safe to pass nullptr to SDL_FreeSurface().
-	_surface = nullptr;
-}
-
-void MSDL_Surface::copy_surface(SDL_Surface * surface)
-{
-	_surface = SDL_ConvertSurface(surface, surface->format, 0);
+	_surface = std::move(move._surface);
+	_dedicated = std::move(move._dedicated);
+	return *this;
 }
 
 bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint32 color)
 {
-	return SDL_FillRect(_surface, rect, color) == 0;
+	return SDL_FillRect(_surface.get(), rect, color) == 0;
 }
 
 bool MSDL_Surface::load_bmp(const string & file)
 {
-	// TODO: Cast this object into MSDL_Surface if it's a MSDL_WindowSurface.
+	reset(SDL_LoadBMP(file.c_str()));
 
-	clear_surface();
-	_surface = SDL_LoadBMP(file.c_str());
-
-	return static_cast<bool>(*this);
+	return (this->_surface != nullptr);
 }
 
 bool MSDL_Surface::blit_from(const MSDL_Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
 {
-	return SDL_BlitSurface(source._surface, src_rect, _surface, dst_rect) == 0;
+	return SDL_BlitSurface(source._surface.get(), src_rect, _surface.get(), dst_rect) == 0;
 }
 
 SDL_PixelFormat * MSDL_Surface::get_format()
@@ -65,4 +64,19 @@ SDL_PixelFormat * MSDL_Surface::get_format()
 		format = _surface->format;
 	}
 	return format;
+}
+
+void MSDL_Surface::reset(SDL_Surface * surface)
+{
+	if (_dedicated) {
+		// If the surface belongs to an SDL_Window, let the window destroy the surface.
+		_surface.release();
+		_dedicated = false;
+	}
+	_surface.reset(surface);
+}
+
+bool MSDL_Surface::empty()
+{
+	return (_surface == nullptr);
 }

@@ -14,9 +14,7 @@ public:
 	MSDL_Window(const char * title, int x, int y, int w, int h, unsigned int window_flags = 0);
 	~MSDL_Window();
 
-	operator bool() const;
-
-	unique_ptr<MSDL_Surface> get_surface() const;
+	MSDL_Surface get_surface() const;
 
 	bool update();
 

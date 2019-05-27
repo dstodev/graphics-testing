@@ -1,8 +1,4 @@
 #include "msdl_window.h"
-#include "msdl_windowsurface.h"
-
-#include <memory>
-using std::make_unique;
 
 #include <iostream>
 using std::cout;
@@ -20,20 +16,14 @@ MSDL_Window::~MSDL_Window()
 	}
 }
 
-MSDL_Window::operator bool() const
-{
-	return _window != nullptr;
-}
-
-unique_ptr<MSDL_Surface> MSDL_Window::get_surface() const
+MSDL_Surface MSDL_Window::get_surface() const
 {
 	SDL_Surface * surface = nullptr;
 	if (_window) {
 		surface = SDL_GetWindowSurface(_window);
-		return make_unique<MSDL_WindowSurface>(surface);
+		return MSDL_Surface(surface, true);
 	} else {
-		// An MSDL_Surface can be evaluated as a boolean to determine if it contains nullptr.
-		return make_unique<MSDL_Surface>();
+		return MSDL_Surface(nullptr);
 	}
 }
 
