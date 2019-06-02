@@ -42,7 +42,7 @@ MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface && move)
 
 bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint32 color)
 {
-	return SDL_FillRect(_surface.get(), rect, color) == 0;
+	return (SDL_FillRect(_surface.get(), rect, color) == 0);
 }
 
 bool MSDL_Surface::load_bmp(const string & file)
@@ -53,7 +53,7 @@ bool MSDL_Surface::load_bmp(const string & file)
 
 bool MSDL_Surface::blit_from(const MSDL_Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
 {
-	return SDL_BlitSurface(source._surface.get(), src_rect, _surface.get(), dst_rect) == 0;
+	return (SDL_BlitSurface(source._surface.get(), src_rect, _surface.get(), dst_rect) == 0);
 }
 
 SDL_PixelFormat * MSDL_Surface::get_format()

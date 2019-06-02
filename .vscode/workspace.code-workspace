@@ -2,10 +2,12 @@
 	"folders": [
 		{
 			"path": "..",
-			"name": "Project: Test 01 (SDL2)"
+			"name": "Project: Test 03 (SDL2)"
 		}
 	],
 	"settings": {
+		"cmake.buildDirectory": "${workspaceRoot}/build",
+		"cmake.sourceDirectory": "${workspaceRoot}/project",
 		"files.associations": {
 			".clang-format": "yaml",
 			"iostream": "cpp",
