@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 	                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 	if (!(screen_surface = window.get_surface()).is_empty()) {
-		screen_surface.fill_rect(0, SDL_MapRGB(screen_surface.get_format(), 0x00, 0xFF, 0xFF));
+		screen_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
 
 		image_surface.load_bmp("images/test.bmp");
 		screen_surface.blit_from(image_surface, 0, 0);

@@ -40,9 +40,9 @@ MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface && move)
 	return *this;
 }
 
-bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint32 color)
+bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
 {
-	return (SDL_FillRect(_surface.get(), rect, color) == 0);
+	return (SDL_FillRect(_surface.get(), rect, SDL_MapRGB(get_format(), r, g, b)) == 0);
 }
 
 bool MSDL_Surface::load_bmp(const string & file)

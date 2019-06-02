@@ -25,7 +25,7 @@ public:
 	MSDL_Surface & operator=(const MSDL_Surface & copy);
 	MSDL_Surface & operator=(MSDL_Surface && move);
 
-	bool fill_rect(SDL_Rect * rect, Uint32 color);
+	bool fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b);
 	bool load_bmp(const string & file);
 	bool blit_from(const MSDL_Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 
