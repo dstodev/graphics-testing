@@ -19,8 +19,9 @@
 		"C_Cpp.updateChannel": "Insiders",
 		"files.associations": {
 			".clang-format": "yaml",
-			"xstring": "cpp"
+			"xstring": "cpp",
+			"string": "cpp",
+			"ostream": "cpp"
 		},
 	},
-}
 }
