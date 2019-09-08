@@ -9,8 +9,8 @@ public:
 	StyleTemplate() = default;
 	virtual ~StyleTemplate() = default;
 	StyleTemplate(const StyleTemplate & copy) = default;
-	StyleTemplate(StyleTemplate && move) = default;
 	StyleTemplate & operator=(const StyleTemplate & copy) = default;
+	StyleTemplate(StyleTemplate && move) = default;
 	StyleTemplate & operator=(StyleTemplate && move) = default;
 
 	// Parameterized constructors

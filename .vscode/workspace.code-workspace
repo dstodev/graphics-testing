@@ -21,7 +21,8 @@
 			".clang-format": "yaml",
 			"xstring": "cpp",
 			"string": "cpp",
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"memory": "cpp"
 		},
 	},
 }

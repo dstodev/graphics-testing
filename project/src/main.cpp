@@ -33,7 +33,7 @@ int main(int argc, char * argv[])
 
 	if (!(screen_surface = window.get_surface()).is_empty()) {
 		screen_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
-		screen_surface.blit_from("images/test.bmp", 0, 0);
+		screen_surface.blit_from("img/test.bmp", 0, 0);
 
 		window.update();
 		SDL_Delay(5000);

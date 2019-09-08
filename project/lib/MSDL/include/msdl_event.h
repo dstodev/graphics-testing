@@ -1,17 +1,19 @@
-// #ifndef MSDL_EVENT_H
-// #define MSDL_EVENT_H
+#ifndef MSDL_EVENT_H
+#define MSDL_EVENT_H
 
-// #include <SDL.h>
+#include <SDL.h>
 
-// class MSDL_EventController
-// {
-// public:
-// 	MSDL_EventController() = default;
-// 	~MSDL_EventController() = default;
+#include "msdl_export.h"
 
-// 	bool await_event(uint32_t type, uint32_t timeout_ms);
+class MSDL_EventController
+{
+public:
+	MSDL_EXPORT MSDL_EventController() = default;
+	MSDL_EXPORT ~MSDL_EventController() = default;
 
-// private:
-// };
+	MSDL_EXPORT bool await_event(uint32_t type, uint32_t timeout_ms);
 
-// #endif
+private:
+};
+
+#endif

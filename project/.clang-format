@@ -24,6 +24,8 @@ UseTab: ForIndentation
 AlwaysBreakTemplateDeclarations: true
 AllowShortFunctionsOnASingleLine: None
 PointerAlignment: Middle
+#AlignConsecutiveMacros: true
+#IndentPPDirectives: BeforeHash
 
 SpaceAfterCStyleCast: true
 SpacesBeforeTrailingComments: 2
