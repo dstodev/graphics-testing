@@ -36,7 +36,9 @@ set_target_properties(msdl PROPERTIES
 
 install(TARGETS msdl EXPORT msdl
 	PUBLIC_HEADER DESTINATION include  # Location to install headers in ${public_headers} defined above
-	INCLUDES DESTINATION include  # Adds this directory to INTERFACE_INCLUDE_DIRECTORIES upon install(export)
+	INCLUDES DESTINATION include/SDL2  # Adds this directory to INTERFACE_INCLUDE_DIRECTORIES upon install(export)
+	                                   # Does not need "include" by itself, as it is added in the above
+	                                   # target_include_directories $<INSTALL_INTERFACE:include> statement.
 	ARCHIVE DESTINATION lib  # .a, .so
 	LIBRARY DESTINATION lib  # .lib
 	RUNTIME DESTINATION bin  # .exe, .dll
