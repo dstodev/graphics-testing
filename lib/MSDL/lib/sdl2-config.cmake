@@ -2,16 +2,20 @@
 
 add_library(SDL2::sdl2 SHARED IMPORTED GLOBAL)
 set(version 2.0.10)
+set(platform x64)
 set_target_properties(SDL2::sdl2 PROPERTIES
-	IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/x64/SDL2.dll"
-	IMPORTED_IMPLIB "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/x64/SDL2.lib"
+	IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/${platform}/SDL2.dll"
+	IMPORTED_IMPLIB "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/${platform}/SDL2.lib"
 	INTERFACE_INCLUDE_DIRECTORIES
+		# TODO: INSTALL_INTERFACE doesn't work here? It doesn't seem to be transitive to the msdl export .cmake
+		# Since INTERFACE_* properties are transitive to non-INTERFACE_* properties, maybe it isn't supposed
+		# to work here. Think about this a bit more.
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/include>;$<INSTALL_INTERFACE:include/SDL2>"
 )
 add_library(SDL2::sdl2main STATIC IMPORTED)
 set_target_properties(SDL2::sdl2main PROPERTIES
-	IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/x64/SDL2main.lib"
+	IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/${platform}/SDL2main.lib"
 )
 file(GLOB public_headers "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/include/*.h*")
 install(FILES ${public_headers} DESTINATION include/SDL2)
-install(FILES "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/x64/SDL2.dll" DESTINATION bin)
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/SDL2-${version}/lib/${platform}/SDL2.dll" DESTINATION bin)
