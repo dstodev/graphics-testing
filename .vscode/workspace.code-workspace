@@ -6,8 +6,9 @@
 		}
 	],
 	"settings": {
+		"cmake.configureOnOpen": true,
 		"cmake.buildDirectory": "${workspaceRoot}/build",
-		"cmake.sourceDirectory": "${workspaceRoot}/project",
+		"cmake.sourceDirectory": "${workspaceRoot}",
 		"cmake.debugConfig": {
 			"cwd": "${workspaceRoot}/build"
 		},
@@ -16,13 +17,14 @@
 			"project/include/SDL2": true,
 		},
 		// Extension settings
-		"C_Cpp.updateChannel": "Insiders",
 		"files.associations": {
 			".clang-format": "yaml",
 			"xstring": "cpp",
 			"string": "cpp",
 			"ostream": "cpp",
-			"memory": "cpp"
+			"memory": "cpp",
+			"iosfwd": "cpp",
+			"xutility": "cpp"
 		},
 	},
 }

@@ -1,6 +1,13 @@
 #ifndef STYLE_TEMPLATE_H
 #define STYLE_TEMPLATE_H
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     Author: Daniel Stotts
+     Modified: 9/15/2019
+     Description:
+         This file serves to describe a generic class using recommended project style.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 template <typename T>
 class StyleTemplate
 {

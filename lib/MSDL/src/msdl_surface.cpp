@@ -1,43 +1,43 @@
+/*
+        2019 Daniel Stotts
+ */
+
 #include "msdl_surface.h"
 
-#include <memory>
-using std::make_unique;
-using std::unique_ptr;
+using std::string;
 
-MSDL_Surface::MSDL_Surface() : _surface(nullptr)
+#include <algorithm>
+
+void MSDL_SurfaceDeleter(SDL_Surface * surface)
+{
+	SDL_FreeSurface(surface);
+}
+
+MSDL_Surface::MSDL_Surface() : _surface(nullptr, MSDL_SurfaceDeleter)
 {}
 
-MSDL_Surface::MSDL_Surface(SDL_Surface * surface, bool dedicated) : _surface(surface), _dedicated(dedicated)
+MSDL_Surface::MSDL_Surface(SDL_Surface * surface) : _surface(surface, MSDL_SurfaceDeleter)
 {}
 
 MSDL_Surface::~MSDL_Surface()
 {}
 
-MSDL_Surface::MSDL_Surface(const MSDL_Surface & copy) : _surface(nullptr)
+MSDL_Surface::MSDL_Surface(const MSDL_Surface & copy)
 {
-	*this = copy;
+	SDL_Surface * surface = copy._surface.get();
+	reset(SDL_ConvertSurface(surface, surface->format, 0));
 }
 
-MSDL_Surface::MSDL_Surface(MSDL_Surface && move)
+MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface other)
 {
-	*this = move;
-}
-
-MSDL_Surface & MSDL_Surface::operator=(const MSDL_Surface & copy)
-{
-	if (this != &copy) {
-		SDL_Surface * surface = copy._surface.get();
-		reset(SDL_ConvertSurface(surface, surface->format, 0));
-		_dedicated = copy._dedicated;
-	}
+	swap(*this, other);
 	return *this;
 }
 
-MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface && move)
+void swap(MSDL_Surface & lhs, MSDL_Surface & rhs)
 {
-	_surface = std::move(move._surface);
-	_dedicated = std::move(move._dedicated);
-	return *this;
+	using std::swap;
+	swap(lhs._surface, rhs._surface);
 }
 
 bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
@@ -48,7 +48,7 @@ bool MSDL_Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
 bool MSDL_Surface::load_bmp(string file)
 {
 	reset(SDL_LoadBMP(file.c_str()));
-	return (this->_surface != nullptr);
+	return !is_empty();
 }
 
 bool MSDL_Surface::blit_from(const MSDL_Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
@@ -73,12 +73,7 @@ SDL_PixelFormat * MSDL_Surface::get_format()
 
 void MSDL_Surface::reset(SDL_Surface * surface)
 {
-	if (_dedicated) {
-		// If the surface belongs to an SDL_Window, let the window destroy the surface.
-		_surface.release();
-		_dedicated = false;
-	}
-	_surface.reset(surface);
+	_surface.reset(surface, MSDL_SurfaceDeleter);
 }
 
 bool MSDL_Surface::is_empty()

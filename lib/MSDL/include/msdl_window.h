@@ -1,8 +1,9 @@
+/*
+        2019 Daniel Stotts
+ */
+
 #ifndef MSDL_WINDOW_H
 #define MSDL_WINDOW_H
-
-#include <memory>
-using std::unique_ptr;
 
 #include <SDL.h>
 
@@ -21,6 +22,7 @@ public:
 
 private:
 	SDL_Window * _window;
+	MSDL_Surface _surface;
 };
 
 #endif

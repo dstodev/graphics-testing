@@ -1,3 +1,7 @@
+/*
+        2019 Daniel Stotts
+ */
+
 #ifndef MSDL_EVENT_H
 #define MSDL_EVENT_H
 

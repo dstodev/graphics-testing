@@ -1,3 +1,7 @@
+/*
+        2019 Daniel Stotts
+ */
+
 #include "msdl_window.h"
 
 #include <iostream>
@@ -7,6 +11,7 @@ using std::endl;
 MSDL_Window::MSDL_Window(const char * title, int x, int y, int w, int h, unsigned int window_flags)
 {
 	_window = SDL_CreateWindow(title, x, y, w, h, window_flags);
+	_surface = MSDL_Surface(SDL_GetWindowSurface(_window));
 }
 
 MSDL_Window::~MSDL_Window()
@@ -18,13 +23,7 @@ MSDL_Window::~MSDL_Window()
 
 MSDL_Surface MSDL_Window::get_surface() const
 {
-	SDL_Surface * surface = nullptr;
-	if (_window) {
-		surface = SDL_GetWindowSurface(_window);
-		return MSDL_Surface(surface, true);  // Returned as rval; real pointer passed by move constructor.
-	} else {
-		return MSDL_Surface(nullptr);
-	}
+	return _surface;
 }
 
 bool MSDL_Window::update()

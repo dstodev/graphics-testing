@@ -1,3 +1,5 @@
+# 2019 Daniel Stotts
+
 ---
 BasedOnStyle: LLVM
 IndentWidth: 8
@@ -26,6 +28,8 @@ AllowShortFunctionsOnASingleLine: None
 PointerAlignment: Middle
 #AlignConsecutiveMacros: true
 #IndentPPDirectives: BeforeHash
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
 
 SpaceAfterCStyleCast: true
 SpacesBeforeTrailingComments: 2
