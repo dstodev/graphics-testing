@@ -6,6 +6,7 @@
 using std::cout;
 using std::endl;
 
+#include <SDL.h>
 #include <msdl_surface.h>
 #include <msdl_window.h>
 

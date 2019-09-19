@@ -24,8 +24,9 @@ MSDL_Surface::~MSDL_Surface()
 
 MSDL_Surface::MSDL_Surface(const MSDL_Surface & copy)
 {
-	SDL_Surface * surface = copy._surface.get();
-	reset(SDL_ConvertSurface(surface, surface->format, 0));
+	_surface = copy._surface;
+	// SDL_Surface * surface = copy._surface.get();
+	// reset(SDL_ConvertSurface(surface, surface->format, 0));
 }
 
 MSDL_Surface & MSDL_Surface::operator=(MSDL_Surface other)

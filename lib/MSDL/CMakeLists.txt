@@ -28,8 +28,8 @@ target_link_libraries(msdl
 		SDL2::sdl2main
 )
 
-file(GLOB public_headers ${CMAKE_CURRENT_LIST_DIR}/include/*.h*)
-list(APPEND public_headers ${CMAKE_BINARY_DIR}/include/msdl_export.h)
+file(GLOB public_headers "${CMAKE_CURRENT_LIST_DIR}/include/*.h*")
+list(APPEND public_headers "${CMAKE_BINARY_DIR}/include/msdl_export.h")
 set_target_properties(msdl PROPERTIES
 	PUBLIC_HEADER "${public_headers}"
 )

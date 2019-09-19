@@ -8,7 +8,15 @@ target_link_libraries(testing-sdl2
 	msdl
 )
 
-install(TARGETS testing-sdl2 DESTINATION bin)
+file(GLOB_RECURSE public_resources "${CMAKE_SOURCE_DIR}/resource/*.bmp")
+set_target_properties(testing-sdl2 PROPERTIES
+	RESOURCE "${public_resources}"
+)
+
+install(TARGETS testing-sdl2
+	RESOURCE DESTINATION bin/img
+	RUNTIME DESTINATION bin
+)
 
 add_custom_command(TARGET testing-sdl2 POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
