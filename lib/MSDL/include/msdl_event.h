@@ -9,15 +9,20 @@
 
 #include "msdl_export.h"
 
-class MSDL_EventController
+namespace MSDL
+{
+
+class EventController
 {
 public:
-	MSDL_EXPORT MSDL_EventController() = default;
-	MSDL_EXPORT ~MSDL_EventController() = default;
+	MSDL_EXPORT EventController() = default;
+	MSDL_EXPORT ~EventController() = default;
 
 	MSDL_EXPORT bool await_event(uint32_t type, uint32_t timeout_ms);
 
 private:
 };
+
+}  // namespace MSDL
 
 #endif

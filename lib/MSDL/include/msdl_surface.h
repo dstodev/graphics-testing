@@ -12,22 +12,25 @@
 
 #include "msdl_export.h"
 
-extern void MSDL_SurfaceDeleter(SDL_Surface * surface);
+namespace MSDL
+{
 
-class MSDL_Surface
+extern void SurfaceDeleter(SDL_Surface * surface);
+
+class Surface
 {
 public:
-	MSDL_EXPORT MSDL_Surface();
-	MSDL_EXPORT virtual ~MSDL_Surface();
-	MSDL_EXPORT MSDL_Surface(SDL_Surface * surface);
-	MSDL_EXPORT MSDL_Surface(const MSDL_Surface & copy);
-	MSDL_EXPORT MSDL_Surface & operator=(MSDL_Surface other);
+	MSDL_EXPORT Surface();
+	MSDL_EXPORT virtual ~Surface();
+	MSDL_EXPORT Surface(SDL_Surface * surface);
+	MSDL_EXPORT Surface(const Surface & copy);
+	MSDL_EXPORT Surface & operator=(Surface other);
 
-	MSDL_EXPORT friend void swap(MSDL_Surface & lhs, MSDL_Surface & rhs);
+	MSDL_EXPORT friend void swap(Surface & lhs, Surface & rhs);
 
 	MSDL_EXPORT bool fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b);
 	MSDL_EXPORT bool load_bmp(std::string file);
-	MSDL_EXPORT bool blit_from(const MSDL_Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
+	MSDL_EXPORT bool blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 	MSDL_EXPORT bool blit_from(std::string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 
 	MSDL_EXPORT SDL_PixelFormat * get_format();
@@ -38,5 +41,7 @@ public:
 protected:
 	std::shared_ptr<SDL_Surface> _surface;
 };
+
+}  // namespace MSDL
 
 #endif

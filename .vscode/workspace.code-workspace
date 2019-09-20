@@ -17,6 +17,7 @@
 			"project/include/SDL2": true,
 		},
 		// Extension settings
+		"C_Cpp.configurationWarnings": "Disabled",
 		"files.associations": {
 			".clang-format": "yaml",
 			"xstring": "cpp",

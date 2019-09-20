@@ -28,9 +28,9 @@ int main(int argc, char * argv[])
 		return 1;
 	}
 
-	MSDL_Surface screen_surface;
-	MSDL_Window window("First Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-	                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	MSDL::Surface screen_surface;
+	MSDL::Window window("First Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+	                    SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 	if (!(screen_surface = window.get_surface()).is_empty()) {
 		screen_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
