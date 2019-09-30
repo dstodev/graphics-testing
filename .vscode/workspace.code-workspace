@@ -6,17 +6,20 @@
 		}
 	],
 	"settings": {
+		"files.exclude": {
+			".vscode/ipch": true,
+			"project/include/SDL2": true,
+		},
+		// Extension settings
 		"cmake.configureOnOpen": true,
 		"cmake.buildDirectory": "${workspaceRoot}/build",
 		"cmake.sourceDirectory": "${workspaceRoot}",
 		"cmake.debugConfig": {
 			"cwd": "${workspaceRoot}/build"
 		},
-		"files.exclude": {
-			".vscode/ipch": true,
-			"project/include/SDL2": true,
+		"cmake.configureSettings": {
+			"BUILD_GMOCK": "OFF"
 		},
-		// Extension settings
 		"C_Cpp.configurationWarnings": "Disabled",
 		"files.associations": {
 			".clang-format": "yaml",

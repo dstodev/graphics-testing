@@ -3,5 +3,7 @@
 cmake_minimum_required(VERSION 3.5.x)
 project(test-03 VERSION 0.2.0)
 
+enable_testing()
+
 add_subdirectory(src)
 add_subdirectory(lib)

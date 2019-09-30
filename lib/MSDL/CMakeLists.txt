@@ -52,3 +52,5 @@ install(EXPORT msdl
 # export(EXPORT msdl
 # 	NAMESPACE MSDL::
 # )
+
+add_subdirectory(test)

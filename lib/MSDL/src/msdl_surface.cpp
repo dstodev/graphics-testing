@@ -17,10 +17,13 @@ void SurfaceDeleter(SDL_Surface * surface)
 	SDL_FreeSurface(surface);
 }
 
+void NopDeleter(SDL_Surface * surface)
+{}
+
 Surface::Surface() : _surface(nullptr, SurfaceDeleter)
 {}
 
-Surface::Surface(SDL_Surface * surface) : _surface(surface, SurfaceDeleter)
+Surface::Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *)) : _surface(surface, deleter)
 {}
 
 Surface::~Surface()

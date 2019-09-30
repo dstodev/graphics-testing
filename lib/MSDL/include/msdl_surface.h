@@ -16,13 +16,14 @@ namespace MSDL
 {
 
 extern void SurfaceDeleter(SDL_Surface * surface);
+extern void NopDeleter(SDL_Surface * surface);
 
 class Surface
 {
 public:
 	MSDL_EXPORT Surface();
 	MSDL_EXPORT virtual ~Surface();
-	MSDL_EXPORT Surface(SDL_Surface * surface);
+	MSDL_EXPORT Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *) = SurfaceDeleter);
 	MSDL_EXPORT Surface(const Surface & copy);
 	MSDL_EXPORT Surface & operator=(Surface other);
 

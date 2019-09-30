@@ -23,6 +23,7 @@ int main(int argc, char * argv[])
 		cout << endl;
 	}
 
+	// TODO: Wrap in RAII class constructor
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		cout << SDL_GetError() << endl;
 		return 1;
@@ -40,6 +41,7 @@ int main(int argc, char * argv[])
 		SDL_Delay(5000);
 	}
 
+	// TODO: Wrap in RAII class destructor
 	SDL_Quit();
 
 	return 0;
