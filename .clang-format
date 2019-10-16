@@ -13,24 +13,25 @@ BreakBeforeBraces: Custom
 BraceWrapping:
     AfterClass: true
     AfterEnum: true
+    AfterExternBlock: true
     AfterFunction: true
     AfterNamespace: true
     AfterStruct: true
     AfterUnion: true
-    AfterExternBlock: true
     SplitEmptyFunction: false
-    SplitEmptyRecord: false
     SplitEmptyNamespace: false
+    SplitEmptyRecord: false
 
-UseTab: ForIndentation
-AlwaysBreakTemplateDeclarations: true
+AlignConsecutiveMacros: true
+AllowAllConstructorInitializersOnNextLine: true
 AllowShortFunctionsOnASingleLine: None
-PointerAlignment: Middle
-#AlignConsecutiveMacros: true
-#IndentPPDirectives: BeforeHash
-BreakConstructorInitializers: AfterColon
+AlwaysBreakTemplateDeclarations: true
+BreakConstructorInitializers: BeforeColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
-
+IndentPPDirectives: BeforeHash
+MaxEmptyLinesToKeep: 2
+PointerAlignment: Middle
 SpaceAfterCStyleCast: true
 SpacesBeforeTrailingComments: 2
+UseTab: ForIndentation
 ...

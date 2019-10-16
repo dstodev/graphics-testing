@@ -5,13 +5,13 @@
 	"tasks": [
 		{
 			"label": "CMake: Generate ZIP Package",
+			"group": "build",
 			"type": "shell",
 			"command": "cpack",
 			"args": [
 				"-G",
 				"ZIP"
 			],
-			"group": "build",
 			"options": {
 				"cwd": "${workspaceFolder}/build"
 			},

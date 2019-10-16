@@ -20,6 +20,7 @@ void SurfaceDeleter(SDL_Surface * surface)
 void NopDeleter(SDL_Surface * surface)
 {}
 
+
 /* ~~~~~~~~~~~~~~
      Surface
 ~~~~~~~~~~~~~~ */
@@ -30,12 +31,6 @@ void swap(Surface & lhs, Surface & rhs)
 }
 
 Surface::Surface() : _surface(nullptr, SurfaceDeleter)
-{}
-
-Surface::Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *)) : _surface(surface, deleter)
-{}
-
-Surface::~Surface()
 {}
 
 Surface::Surface(const Surface & copy)
@@ -50,6 +45,12 @@ Surface & Surface::operator=(Surface copy)
 	swap(*this, copy);
 	return *this;
 }
+
+Surface::~Surface()
+{}
+
+Surface::Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *)) : _surface(surface, deleter)
+{}
 
 bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
 {
