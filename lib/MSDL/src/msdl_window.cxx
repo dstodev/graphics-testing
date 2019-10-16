@@ -2,7 +2,7 @@
         2019 Daniel Stotts
  */
 
-#include "msdl_window.h"
+#include <msdl_window.hxx>
 
 #include <iostream>
 using std::cout;

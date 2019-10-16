@@ -7,8 +7,8 @@
 
 #include <SDL.h>
 
-#include "msdl_export.h"
-#include "msdl_surface.h"
+#include "msdl_surface.hxx"
+#include <msdl_export.hxx>
 
 namespace MSDL
 {

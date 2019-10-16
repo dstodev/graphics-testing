@@ -2,7 +2,7 @@
         2019 Daniel Stotts
  */
 
-#include "msdl_surface.h"
+#include <msdl_surface.hxx>
 
 #include <string>
 using std::string;
@@ -20,6 +20,15 @@ void SurfaceDeleter(SDL_Surface * surface)
 void NopDeleter(SDL_Surface * surface)
 {}
 
+/* ~~~~~~~~~~~~~~
+     Surface
+~~~~~~~~~~~~~~ */
+void swap(Surface & lhs, Surface & rhs)
+{
+	using std::swap;
+	swap(lhs._surface, rhs._surface);
+}
+
 Surface::Surface() : _surface(nullptr, SurfaceDeleter)
 {}
 
@@ -36,16 +45,10 @@ Surface::Surface(const Surface & copy)
 	// reset(SDL_ConvertSurface(surface, surface->format, 0));
 }
 
-Surface & Surface::operator=(Surface other)
+Surface & Surface::operator=(Surface copy)
 {
-	swap(*this, other);
+	swap(*this, copy);
 	return *this;
-}
-
-void swap(Surface & lhs, Surface & rhs)
-{
-	using std::swap;
-	swap(lhs._surface, rhs._surface);
 }
 
 bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)

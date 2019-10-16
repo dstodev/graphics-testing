@@ -3,22 +3,30 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      Author: Daniel Stotts
-     Modified: 9/15/2019
+     Modified: 10/15/2019
      Description:
          This file serves to describe a generic class using recommended project style.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+// Forward declarations
+class OtherClassA;
+class OtherClassB;
+
 template <typename T>
 class StyleTemplate
 {
+	// Friends; classes first
+	friend class OtherClassA;
+	friend void OtherClassB::ExampleMethod();
+
 public:
-	// Canonical methods
+	// Canonical methods (special member functions)
 	StyleTemplate() = default;
-	virtual ~StyleTemplate() = default;
 	StyleTemplate(const StyleTemplate & copy) = default;
-	StyleTemplate & operator=(const StyleTemplate & copy) = default;
 	StyleTemplate(StyleTemplate && move) = default;
+	StyleTemplate & operator=(const StyleTemplate & copy) = default;
 	StyleTemplate & operator=(StyleTemplate && move) = default;
+	virtual ~StyleTemplate() = default;
 
 	// Parameterized constructors
 	StyleTemplate(T value);
@@ -27,14 +35,21 @@ public:
 	operator bool() const;
 
 	// Setters/getters
+	void set_value(T value);
 	T get_value() const;
 
 	// Methods
 	void invoke();
 
 private:
+	// Declarations from the public field follow the same order in the private field, if applicable.
+
+	// Data members
 	T _value;
 };
+
+// For template classes, definitions are written in the same header file. For concrete classes, definitions are
+// written in a related implementation (.cxx) file.
 
 template <typename T>
 StyleTemplate<T>::StyleTemplate(T value) : _value(value)
@@ -43,7 +58,15 @@ StyleTemplate<T>::StyleTemplate(T value) : _value(value)
 template <typename T>
 StyleTemplate<T>::operator bool() const
 {
-	return _value != 0;
+	// Maybe the type of _value isn't comparable with (int) 0.
+	// This is a style example, so this probably doesn't matter lmao
+	return (_value != 0);
+}
+
+template <typename T>
+void StyleTemplate<T>::set_value(T value)
+{
+	_value = value;
 }
 
 template <typename T>

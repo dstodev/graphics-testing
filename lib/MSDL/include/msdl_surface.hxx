@@ -10,7 +10,7 @@
 #include <memory>
 #include <string>
 
-#include "msdl_export.h"
+#include <msdl_export.hxx>
 
 namespace MSDL
 {
@@ -20,14 +20,15 @@ extern void NopDeleter(SDL_Surface * surface);
 
 class Surface
 {
+	friend void swap(Surface & lhs, Surface & rhs);
+
 public:
 	MSDL_EXPORT Surface();
-	MSDL_EXPORT virtual ~Surface();
-	MSDL_EXPORT Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *) = SurfaceDeleter);
 	MSDL_EXPORT Surface(const Surface & copy);
-	MSDL_EXPORT Surface & operator=(Surface other);
+	MSDL_EXPORT Surface & operator=(Surface copy);
+	MSDL_EXPORT virtual ~Surface();
 
-	MSDL_EXPORT friend void swap(Surface & lhs, Surface & rhs);
+	MSDL_EXPORT Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *) = SurfaceDeleter);
 
 	MSDL_EXPORT bool fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b);
 	MSDL_EXPORT bool load_bmp(std::string file);

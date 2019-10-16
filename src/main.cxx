@@ -7,8 +7,8 @@ using std::cout;
 using std::endl;
 
 #include <SDL.h>
-#include <msdl_surface.h>
-#include <msdl_window.h>
+#include <msdl_surface.hxx>
+#include <msdl_window.hxx>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;

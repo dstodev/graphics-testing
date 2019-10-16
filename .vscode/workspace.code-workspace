@@ -1,16 +1,25 @@
 {
 	"folders": [
+		/* ~~~~~~~~~~~~~~~~~~~
+		     Main Project
+		~~~~~~~~~~~~~~~~~~~ */
 		{
 			"path": "..",
 			"name": "Project: Test 03 (SDL2)"
 		}
 	],
 	"settings": {
+		/* ~~~~~~~~~~~~~~~~~~~~~~~
+		     Vanilla Settings
+		~~~~~~~~~~~~~~~~~~~~~~~ */
 		"files.exclude": {
 			".vscode/ipch": true,
 			"project/include/SDL2": true,
 		},
-		// Extension settings
+		//
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
+		     Extension Settings
+		~~~~~~~~~~~~~~~~~~~~~~~~~ */
 		"cmake.configureOnOpen": true,
 		"cmake.buildDirectory": "${workspaceRoot}/build",
 		"cmake.sourceDirectory": "${workspaceRoot}",
@@ -20,7 +29,12 @@
 		"cmake.configureSettings": {
 			"BUILD_GMOCK": "OFF"
 		},
+		"C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
 		"C_Cpp.configurationWarnings": "Disabled",
+		//
+		/* ~~~~~~~~~~~~~~~~~~~~~
+		     Other Settings
+		~~~~~~~~~~~~~~~~~~~~~ */
 		"files.associations": {
 			".clang-format": "yaml",
 			"xstring": "cpp",
@@ -28,7 +42,8 @@
 			"ostream": "cpp",
 			"memory": "cpp",
 			"iosfwd": "cpp",
-			"xutility": "cpp"
+			"xutility": "cpp",
+			"xmemory0": "cpp"
 		},
 	},
 }
