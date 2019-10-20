@@ -14,21 +14,19 @@ namespace MSDL
 Window::Window(const char * title, int x, int y, int w, int h, unsigned int window_flags)
 {
 	_window = SDL_CreateWindow(title, x, y, w, h, window_flags);
-
-	// Pass no-op deleter to override instantiation with the default SurfaceDeleter() deleter function, because the
-	// surface is freed by SDL_DestroyWindow()
-	_surface = Surface(SDL_GetWindowSurface(_window), NopDeleter);
+	_surface = Surface(SDL_GetWindowSurface(_window));
 }
 
 Window::~Window()
 {
 	if (_window) {
-		_surface.reset();
+		// Do not let the surface delete the pointer, as SDL_DestroyWindow() will do that for us
+		_surface.get_surface().release();
 		SDL_DestroyWindow(_window);
 	}
 }
 
-Surface Window::get_surface() const
+Surface & Window::get_surface()
 {
 	return _surface;
 }

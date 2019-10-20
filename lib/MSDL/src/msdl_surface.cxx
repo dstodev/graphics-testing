@@ -7,19 +7,14 @@
 #include <string>
 using std::string;
 
+#include <memory>
+using std::unique_ptr;
+
 #include <algorithm>
+
 
 namespace MSDL
 {
-
-void SurfaceDeleter(SDL_Surface * surface)
-{
-	SDL_FreeSurface(surface);
-}
-
-void NopDeleter(SDL_Surface * surface)
-{}
-
 
 /* ~~~~~~~~~~~~~~
      Surface
@@ -30,14 +25,14 @@ void swap(Surface & lhs, Surface & rhs)
 	swap(lhs._surface, rhs._surface);
 }
 
-Surface::Surface() : _surface(nullptr, SurfaceDeleter)
+Surface::Surface() : _surface(nullptr)
 {}
 
 Surface::Surface(const Surface & copy)
 {
-	_surface = copy._surface;
-	// SDL_Surface * surface = copy._surface.get();
-	// reset(SDL_ConvertSurface(surface, surface->format, 0));
+	//_surface = copy._surface;
+	surface_ptr & surface = copy.get_surface();
+	reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
 }
 
 Surface & Surface::operator=(Surface copy)
@@ -49,8 +44,15 @@ Surface & Surface::operator=(Surface copy)
 Surface::~Surface()
 {}
 
-Surface::Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *)) : _surface(surface, deleter)
-{}
+Surface::Surface(SDL_Surface * surface) : _surface(surface)
+{
+	// TODO: This method
+}
+
+Surface::operator bool() const
+{
+	return !is_empty();
+}
 
 bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
 {
@@ -59,8 +61,7 @@ bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
 
 bool Surface::load_bmp(string file)
 {
-	reset(SDL_LoadBMP(file.c_str()));
-	return !is_empty();
+	return reset(SDL_LoadBMP(file.c_str()));
 }
 
 bool Surface::blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
@@ -68,13 +69,18 @@ bool Surface::blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_R
 	return (SDL_BlitSurface(source._surface.get(), src_rect, _surface.get(), dst_rect) == 0);
 }
 
-bool Surface::blit_from(string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
+bool Surface::blit_from(const string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect)
 {
 	SDL_Surface * source = SDL_LoadBMP(file.c_str());
 	return (SDL_BlitSurface(source, src_rect, _surface.get(), dst_rect) == 0);
 }
 
-SDL_PixelFormat * Surface::get_format()
+surface_ptr & Surface::get_surface() const
+{
+	return _surface;
+}
+
+SDL_PixelFormat * Surface::get_format() const
 {
 	SDL_PixelFormat * format = nullptr;
 	if (_surface) {
@@ -83,12 +89,13 @@ SDL_PixelFormat * Surface::get_format()
 	return format;
 }
 
-void Surface::reset(SDL_Surface * surface)
+bool Surface::reset(SDL_Surface * surface)
 {
-	_surface.reset(surface, SurfaceDeleter);
+	_surface.reset(surface);
+	return !is_empty();
 }
 
-bool Surface::is_empty()
+bool Surface::is_empty() const
 {
 	return (_surface == nullptr);
 }

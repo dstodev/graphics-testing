@@ -12,11 +12,20 @@
 
 #include <msdl_export.hxx>
 
+
 namespace MSDL
 {
 
-extern void SurfaceDeleter(SDL_Surface * surface);
-extern void NopDeleter(SDL_Surface * surface);
+struct SurfaceDeleter
+{
+	void operator()(SDL_Surface * surface)
+	{
+		SDL_FreeSurface(surface);
+	}
+};
+
+using surface_ptr = std::unique_ptr<SDL_Surface, SurfaceDeleter>;
+
 
 class Surface
 {
@@ -28,20 +37,23 @@ public:
 	MSDL_EXPORT Surface & operator=(Surface copy);
 	MSDL_EXPORT virtual ~Surface();
 
-	MSDL_EXPORT Surface(SDL_Surface * surface, void (*deleter)(SDL_Surface *) = SurfaceDeleter);
+	MSDL_EXPORT Surface(SDL_Surface * surface);
+
+	MSDL_EXPORT operator bool() const;
 
 	MSDL_EXPORT bool fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b);
 	MSDL_EXPORT bool load_bmp(std::string file);
 	MSDL_EXPORT bool blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
-	MSDL_EXPORT bool blit_from(std::string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
+	MSDL_EXPORT bool blit_from(const std::string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 
-	MSDL_EXPORT SDL_PixelFormat * get_format();
+	surface_ptr & get_surface() const;
+	MSDL_EXPORT SDL_PixelFormat * get_format() const;
 
-	MSDL_EXPORT void reset(SDL_Surface * surface = nullptr);
-	MSDL_EXPORT bool is_empty();
+	MSDL_EXPORT bool reset(SDL_Surface * surface = nullptr);
+	MSDL_EXPORT bool is_empty() const;
 
 protected:
-	std::shared_ptr<SDL_Surface> _surface;
+	mutable surface_ptr _surface;
 };
 
 }  // namespace MSDL

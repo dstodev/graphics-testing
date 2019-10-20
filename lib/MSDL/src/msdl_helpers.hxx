@@ -11,6 +11,7 @@ using std::endl;
 
 #include <SDL.h>
 
+
 #define MSDL_ASSERT_ZERO(expression)                                                                                   \
 	if (expression != 0) {                                                                                         \
 		cout << "Expression resolved to non-zero value: " << expression << "\n";                               \

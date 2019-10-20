@@ -4,10 +4,6 @@ include(CPack)
 
 add_executable(testing-sdl2 WIN32 main.cxx)
 
-if (MSVC)
-	add_compile_options(/W4)
-endif()
-
 target_link_libraries(testing-sdl2
 	msdl
 )

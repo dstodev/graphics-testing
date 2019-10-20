@@ -23,19 +23,21 @@ int main(int argc, char * argv[])
 		cout << endl;
 	}
 
+	int * a = new int(10);
+
 	// TODO: Wrap in RAII class constructor
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		cout << SDL_GetError() << endl;
 		return 1;
 	}
 
-	MSDL::Surface screen_surface;
 	MSDL::Window window("First Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
 	                    SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	MSDL::Surface & window_surface = window.get_surface();
 
-	if (!(screen_surface = window.get_surface()).is_empty()) {
-		screen_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
-		screen_surface.blit_from("img/test.bmp", 0, 0);
+	if (window_surface) {
+		window_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
+		window_surface.blit_from("img/test.bmp", 0, 0);
 
 		window.update();
 		SDL_Delay(5000);

@@ -19,7 +19,7 @@ public:
 	MSDL_EXPORT Window(const char * title, int x, int y, int w, int h, unsigned int window_flags = 0);
 	MSDL_EXPORT ~Window();
 
-	MSDL_EXPORT Surface get_surface() const;
+	MSDL_EXPORT Surface & get_surface();
 
 	MSDL_EXPORT bool update();
 
