@@ -30,9 +30,10 @@ Surface::Surface() : _surface(nullptr)
 
 Surface::Surface(const Surface & copy)
 {
-	//_surface = copy._surface;
 	surface_ptr & surface = copy.get_surface();
-	reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
+	if (surface) {
+		reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
+	}
 }
 
 Surface & Surface::operator=(Surface copy)

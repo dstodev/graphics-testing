@@ -46,7 +46,7 @@ public:
 	MSDL_EXPORT bool blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 	MSDL_EXPORT bool blit_from(const std::string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 
-	surface_ptr & get_surface() const;
+	MSDL_EXPORT surface_ptr & get_surface() const;
 	MSDL_EXPORT SDL_PixelFormat * get_format() const;
 
 	MSDL_EXPORT bool reset(SDL_Surface * surface = nullptr);

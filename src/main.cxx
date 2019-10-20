@@ -23,8 +23,6 @@ int main(int argc, char * argv[])
 		cout << endl;
 	}
 
-	int * a = new int(10);
-
 	// TODO: Wrap in RAII class constructor
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		cout << SDL_GetError() << endl;
