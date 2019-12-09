@@ -6,9 +6,7 @@
 #define MSDL_EVENT_H
 
 #include <SDL.h>
-
 #include <msdl_export.hxx>
-
 
 namespace MSDL
 {

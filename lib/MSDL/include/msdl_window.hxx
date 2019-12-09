@@ -5,6 +5,8 @@
 #ifndef MSDL_WINDOW_H
 #define MSDL_WINDOW_H
 
+#include <memory>
+
 #include <SDL.h>
 
 #include "msdl_surface.hxx"
@@ -13,19 +15,27 @@
 namespace MSDL
 {
 
-class Window
+struct WindowDeleter
+{
+	void operator()(SDL_Window * window)
+	{
+		SDL_DestroyWindow(window);
+	}
+};
+
+using window_ptr = std::unique_ptr<SDL_Window, WindowDeleter>;
+
+
+class Window : public Surface
 {
 public:
 	MSDL_EXPORT Window(const char * title, int x, int y, int w, int h, unsigned int window_flags = 0);
 	MSDL_EXPORT ~Window();
 
-	MSDL_EXPORT Surface & get_surface();
-
 	MSDL_EXPORT bool update();
 
 private:
-	SDL_Window * _window;
-	Surface _surface;
+	window_ptr _window;
 };
 
 }  // namespace MSDL

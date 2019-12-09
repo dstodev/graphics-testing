@@ -4,36 +4,34 @@
 
 #include <msdl_window.hxx>
 
+#include <memory>
+using std::make_unique;
+
 #include <iostream>
 using std::cout;
 using std::endl;
+
 
 namespace MSDL
 {
 
 Window::Window(const char * title, int x, int y, int w, int h, unsigned int window_flags)
 {
-	_window = SDL_CreateWindow(title, x, y, w, h, window_flags);
-	_surface = Surface(SDL_GetWindowSurface(_window));
+	_window = window_ptr(SDL_CreateWindow(title, x, y, w, h, window_flags));
+	_surface.reset(SDL_GetWindowSurface(_window.get()));
 }
 
 Window::~Window()
 {
 	if (_window) {
 		// Do not let the surface delete the pointer, as SDL_DestroyWindow() will do that for us
-		_surface.get_surface().release();
-		SDL_DestroyWindow(_window);
+		_surface.release();
 	}
-}
-
-Surface & Window::get_surface()
-{
-	return _surface;
 }
 
 bool Window::update()
 {
-	return (SDL_UpdateWindowSurface(_window) == 0);
+	return (SDL_UpdateWindowSurface(_window.get()) == 0);
 }
 
 }  // namespace MSDL

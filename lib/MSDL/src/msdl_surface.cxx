@@ -16,9 +16,6 @@ using std::unique_ptr;
 namespace MSDL
 {
 
-/* ~~~~~~~~~~~~~~
-     Surface
-~~~~~~~~~~~~~~ */
 void swap(Surface & lhs, Surface & rhs)
 {
 	using std::swap;
@@ -30,7 +27,7 @@ Surface::Surface() : _surface(nullptr)
 
 Surface::Surface(const Surface & copy)
 {
-	surface_ptr & surface = copy.get_surface();
+	const surface_ptr & surface = copy._surface;
 	if (surface) {
 		reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
 	}
@@ -46,13 +43,16 @@ Surface::~Surface()
 {}
 
 Surface::Surface(SDL_Surface * surface) : _surface(surface)
-{
-	// TODO: This method
-}
+{}
 
 Surface::operator bool() const
 {
 	return !is_empty();
+}
+
+bool Surface::operator==(const Surface & rhs) const
+{
+	return false;
 }
 
 bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
@@ -74,11 +74,6 @@ bool Surface::blit_from(const string file, const SDL_Rect * src_rect, SDL_Rect *
 {
 	SDL_Surface * source = SDL_LoadBMP(file.c_str());
 	return (SDL_BlitSurface(source, src_rect, _surface.get(), dst_rect) == 0);
-}
-
-surface_ptr & Surface::get_surface() const
-{
-	return _surface;
 }
 
 SDL_PixelFormat * Surface::get_format() const

@@ -13,15 +13,11 @@ using std::endl;
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+void print_parameters(int argc, char * argv[]);
+
 int main(int argc, char * argv[])
 {
-	if (argc > 1) {
-		cout << "Parameters:\n";
-		for (int i = 1; i < argc; ++i) {
-			cout << i << ". " << argv[i] << '\n';
-		}
-		cout << endl;
-	}
+	print_parameters(argc, argv);
 
 	// TODO: Wrap in RAII class constructor
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -31,11 +27,10 @@ int main(int argc, char * argv[])
 
 	MSDL::Window window("First Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
 	                    SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	MSDL::Surface & window_surface = window.get_surface();
 
-	if (window_surface) {
-		window_surface.fill_rect(0, 0x00, 0xFF, 0xFF);
-		window_surface.blit_from("img/test.bmp", 0, 0);
+	if (window) {
+		window.fill_rect(0, 0x00, 0xFF, 0xFF);
+		window.blit_from("img/test.bmp", 0, 0);
 
 		window.update();
 		SDL_Delay(5000);
@@ -45,4 +40,15 @@ int main(int argc, char * argv[])
 	SDL_Quit();
 
 	return 0;
+}
+
+void print_parameters(int argc, char * argv[])
+{
+	if (argc > 1) {
+		cout << "Parameters:\n";
+		for (int i = 1; i < argc; ++i) {
+			cout << i << ". " << argv[i] << '\n';
+		}
+		cout << endl;
+	}
 }

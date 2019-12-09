@@ -6,12 +6,17 @@
 	"configurations": [
 		{
 			"name": "(Windows) Debug",
-			"type": "lldb",
+			"type": "cppvsdbg",
 			"request": "launch",
 			"program": "${command:cmake.launchTargetPath}",
 			"args": [],
 			"cwd": "${workspaceFolder}/build/bin",
-			"env": {}
+			"environment": [],
+			"stopAtEntry": false,
+			"externalConsole": false,
+			"logging": {
+				"moduleLoad": false,
+			}
 		}
 	]
 }
