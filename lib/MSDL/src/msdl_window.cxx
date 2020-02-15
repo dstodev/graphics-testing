@@ -34,4 +34,12 @@ bool Window::update()
 	return (SDL_UpdateWindowSurface(_window.get()) == 0);
 }
 
+bool Window::reset(SDL_Surface * surface)
+{
+	(void) surface;  // Parameter is unused
+
+	// Do not let the window's surface be reset
+	return false;
+}
+
 }  // namespace MSDL

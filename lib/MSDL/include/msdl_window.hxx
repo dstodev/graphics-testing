@@ -33,6 +33,7 @@ public:
 	MSDL_EXPORT ~Window();
 
 	MSDL_EXPORT bool update();
+	MSDL_EXPORT bool reset(SDL_Surface * surface = nullptr);
 
 private:
 	window_ptr _window;

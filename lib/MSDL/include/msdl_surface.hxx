@@ -10,6 +10,7 @@
 
 #include <SDL.h>
 
+#include < msdl.hxx>
 #include <msdl_export.hxx>
 
 namespace MSDL
@@ -40,6 +41,8 @@ public:
 	MSDL_EXPORT virtual ~Surface();
 
 	MSDL_EXPORT Surface(SDL_Surface * surface);
+	MSDL_EXPORT Surface::Surface(int width, int height, ColorDepth depth);
+
 
 	MSDL_EXPORT operator bool() const;
 	MSDL_EXPORT bool operator==(const Surface & rhs) const;
@@ -48,6 +51,7 @@ public:
 	MSDL_EXPORT bool load_bmp(std::string file);
 	MSDL_EXPORT bool blit_from(const Surface & source, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
 	MSDL_EXPORT bool blit_from(const std::string file, const SDL_Rect * src_rect, SDL_Rect * dst_rect);
+	MSDL_EXPORT bool create_rgb(int width, int height, ColorDepth depth);
 	MSDL_EXPORT bool reset(SDL_Surface * surface = nullptr);
 	MSDL_EXPORT bool is_empty() const;
 

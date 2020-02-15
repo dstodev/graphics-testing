@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15.x)
 project(test-03 VERSION 0.2.0)
 
 if (MSVC)
-	add_compile_options(/W4)
+	add_compile_options(/W4 /WX)
 endif()
 
 # Set global runtime output directory so .dll files are placed adjacent to .exe files

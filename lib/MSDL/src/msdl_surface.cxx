@@ -1,8 +1,10 @@
 /*
         2019 Daniel Stotts
  */
-
 #include <msdl_surface.hxx>
+
+#include <msdl.hxx>
+using MSDL::ColorDepth;
 
 #include <string>
 using std::string;
@@ -29,7 +31,7 @@ Surface::Surface(const Surface & copy)
 {
 	const surface_ptr & surface = copy._surface;
 	if (surface) {
-		reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
+		_surface.reset(SDL_ConvertSurface(surface.get(), surface->format, 0));
 	}
 }
 
@@ -45,6 +47,11 @@ Surface::~Surface()
 Surface::Surface(SDL_Surface * surface) : _surface(surface)
 {}
 
+Surface::Surface(int width, int height, ColorDepth depth)
+{
+	create_rgb(width, height, depth);
+}
+
 Surface::operator bool() const
 {
 	return !is_empty();
@@ -52,6 +59,9 @@ Surface::operator bool() const
 
 bool Surface::operator==(const Surface & rhs) const
 {
+	(void) rhs;
+
+	// TODO: Determine whether surfaces are equal
 	return false;
 }
 
@@ -74,6 +84,19 @@ bool Surface::blit_from(const string file, const SDL_Rect * src_rect, SDL_Rect *
 {
 	SDL_Surface * source = SDL_LoadBMP(file.c_str());
 	return (SDL_BlitSurface(source, src_rect, _surface.get(), dst_rect) == 0);
+}
+
+bool Surface::create_rgb(int width, int height, ColorDepth depth)
+{
+	bool success = false;
+	SDL_Surface * surface =
+	    SDL_CreateRGBSurface(0, width, height, static_cast<int>(depth), RMASK, GMASK, BMASK, AMASK);
+
+	if (surface) {
+		reset(surface);
+		success = true;
+	}
+	return success;
 }
 
 SDL_PixelFormat * Surface::get_format() const
