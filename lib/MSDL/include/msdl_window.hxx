@@ -1,7 +1,3 @@
-/*
-        2019 Daniel Stotts
- */
-
 #ifndef MSDL_WINDOW_H
 #define MSDL_WINDOW_H
 

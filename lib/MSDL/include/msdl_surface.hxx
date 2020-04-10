@@ -1,7 +1,3 @@
-/*
-        2019 Daniel Stotts
- */
-
 #ifndef MSDL_SURFACE_H
 #define MSDL_SURFACE_H
 

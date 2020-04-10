@@ -1,7 +1,6 @@
 /*
         2019 Daniel Stotts
  */
-
 #include <msdl_window.hxx>
 
 #include <memory>

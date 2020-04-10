@@ -1,14 +1,9 @@
 # Tests
-add_executable(test_msdl
-	test_msdl_surface.cxx
-)
+include(test_util)
 
-target_link_libraries(test_msdl
-	PRIVATE
+util_add_test(test_msdl
+	FILES
+		test_msdl_surface.cxx
+	LIBRARIES
 		msdl
-		gtest
-		gtest_main
 )
-
-include(GoogleTest)
-gtest_discover_tests(test_msdl)

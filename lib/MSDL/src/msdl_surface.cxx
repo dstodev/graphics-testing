@@ -59,10 +59,14 @@ Surface::operator bool() const
 
 bool Surface::operator==(const Surface & rhs) const
 {
-	(void) rhs;
+	bool equal = false;
 
-	// TODO: Determine whether surfaces are equal
-	return false;
+	// Shallow evaluation
+	if (_surface == rhs._surface) {
+		equal = true;
+	}
+
+	return equal;
 }
 
 bool Surface::fill_rect(SDL_Rect * rect, Uint8 r, Uint8 g, Uint8 b)
@@ -102,9 +106,11 @@ bool Surface::create_rgb(int width, int height, ColorDepth depth)
 SDL_PixelFormat * Surface::get_format() const
 {
 	SDL_PixelFormat * format = nullptr;
+
 	if (_surface) {
 		format = _surface->format;
 	}
+
 	return format;
 }
 

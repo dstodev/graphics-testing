@@ -1,7 +1,3 @@
-/*
-        2019 Daniel Stotts
- */
-
 #ifndef MSDL_ERROR_H
 #define MSDL_ERROR_H
 

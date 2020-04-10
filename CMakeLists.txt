@@ -3,6 +3,8 @@
 cmake_minimum_required(VERSION 3.15.x)
 project(test-03 VERSION 0.2.0)
 
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/lib/cmake)
+
 if (MSVC)
 	add_compile_options(/W4 /WX)
 endif()

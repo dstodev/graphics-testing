@@ -4,8 +4,8 @@
 		     Main Project
 		~~~~~~~~~~~~~~~~~~~ */
 		{
-			"path": "..",
-			"name": "Project: Test 03 (SDL2)"
+			"name": "Project: Test 03 (SDL2)",
+			"path": ".."
 		}
 	],
 	"settings": {
