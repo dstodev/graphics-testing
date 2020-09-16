@@ -6,11 +6,10 @@
 
 #include <SDL.h>
 
-#include < msdl.hxx>
+#include <msdl.hxx>
 #include <msdl_export.hxx>
 
-namespace MSDL
-{
+namespace MSDL {
 
 struct SurfaceDeleter
 {
@@ -37,7 +36,7 @@ public:
 	MSDL_EXPORT virtual ~Surface();
 
 	MSDL_EXPORT Surface(SDL_Surface * surface);
-	MSDL_EXPORT Surface::Surface(int width, int height, ColorDepth depth);
+	MSDL_EXPORT Surface(int width, int height, ColorDepth depth);
 
 
 	MSDL_EXPORT operator bool() const;

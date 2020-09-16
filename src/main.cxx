@@ -1,6 +1,6 @@
 /*
         2019 Daniel Stotts
- */
+*/
 
 #include <iostream>
 using std::cout;

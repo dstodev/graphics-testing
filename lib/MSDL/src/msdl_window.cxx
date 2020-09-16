@@ -1,6 +1,6 @@
 /*
         2019 Daniel Stotts
- */
+*/
 #include <msdl_window.hxx>
 
 #include <memory>
@@ -11,8 +11,7 @@ using std::cout;
 using std::endl;
 
 
-namespace MSDL
-{
+namespace MSDL {
 
 Window::Window(const char * title, int x, int y, int w, int h, unsigned int window_flags)
 {

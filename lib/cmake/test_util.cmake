@@ -14,7 +14,6 @@ function(util_add_test name)
 	)
 	target_link_libraries(${name}
 		PRIVATE
-			gtest
 			gtest_main
 			${${name}_LIBRARIES}
 	)

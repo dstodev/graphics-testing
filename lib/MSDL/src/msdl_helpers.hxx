@@ -1,6 +1,6 @@
 /*
         2019 Daniel Stotts
- */
+*/
 #ifndef MSDL_HELPERS_H
 #define MSDL_HELPERS_H
 

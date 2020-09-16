@@ -1,6 +1,6 @@
 /*
         2019 Daniel Stotts
- */
+*/
 #include <msdl_surface.hxx>
 
 #include <msdl.hxx>
@@ -15,8 +15,7 @@ using std::unique_ptr;
 #include <algorithm>
 
 
-namespace MSDL
-{
+namespace MSDL {
 
 void swap(Surface & lhs, Surface & rhs)
 {
