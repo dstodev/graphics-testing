@@ -4,8 +4,7 @@
 #include <SDL.h>
 #include <msdl_export.hxx>
 
-namespace MSDL
-{
+namespace MSDL {
 
 class EventController
 {

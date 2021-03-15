@@ -3,8 +3,7 @@
 
 #include <SDL.h>
 
-namespace MSDL
-{
+namespace MSDL {
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 static constexpr unsigned int RMASK = 0xff000000u;

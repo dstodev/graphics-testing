@@ -1,23 +1,24 @@
-# 2019 Daniel Stotts
+# 2020 Daniel Stotts
 
 ---
 BasedOnStyle: LLVM
-IndentWidth: 8
 ColumnLimit: 120
+IndentWidth: 4
 ---
+AccessModifierOffset: -4
 Language: Cpp
 Standard: Cpp11
-AccessModifierOffset: -8
 
 BreakBeforeBraces: Custom
 BraceWrapping:
     AfterClass: true
     AfterEnum: true
-    AfterExternBlock: true
+    AfterExternBlock: false
     AfterFunction: true
     AfterNamespace: false
     AfterStruct: true
     AfterUnion: true
+    BeforeElse: true
     SplitEmptyFunction: false
     SplitEmptyNamespace: false
     SplitEmptyRecord: false

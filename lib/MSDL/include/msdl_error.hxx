@@ -1,8 +1,7 @@
 #ifndef MSDL_ERROR_H
 #define MSDL_ERROR_H
 
-namespace MSDL
-{
+namespace MSDL {
 
 enum class Error
 {

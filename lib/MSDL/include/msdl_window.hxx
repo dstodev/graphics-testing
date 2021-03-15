@@ -8,8 +8,7 @@
 #include "msdl_surface.hxx"
 #include <msdl_export.hxx>
 
-namespace MSDL
-{
+namespace MSDL {
 
 struct WindowDeleter
 {
